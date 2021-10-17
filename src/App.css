@@ -28,3 +28,164 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #2b2eff;
+  color: #2b2eff;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: #2b2eff;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #2b2eff;
+}
+
+.paginationDisabled a {
+  color: grey;
+  background-color: grey;
+}
+.a-select {
+  display: inherit;
+  position: relative; }
+
+.o-content__inner {
+    margin-bottom: 20px; }
+    .o-content {
+      padding: 10px;
+      background: #ffffff; }
+    @media (min-width: 480px) {
+      .o-content {
+        padding: 20px; } }
+
+
+        .m-typeahead {
+          position: relative; }
+        .m-typeahead .a-input {
+          margin-bottom: 0; }
+        .m-typeahead .a-input + .a-dropdown {
+          width: 200px; }
+        .m-typeahead .a-input--small + .a-dropdown {
+          width: 150px; }
+        .m-typeahead .a-input--large + .a-dropdown {
+          width: 100%;
+          max-width: 300px; }
+        .m-typeahead .a-input--largest + .a-dropdown {
+          width: 100%;
+          max-width: 500px; }
+        .m-typeahead .a-input--auto + .a-dropdown {
+          width: 100%; }
+        .m-typeahead .a-dropdown {
+          display: none; }
+        .m-typeahead.active .a-dropdown {
+          display: inline;
+          position: absolute;
+          z-index: 1;
+          max-height: 240px;
+          margin-top: 5px;
+          overflow: auto;
+          -webkit-box-shadow: 0 1px 3px 0 #bdbdbd;
+          box-shadow: 0 1px 3px 0 #bdbdbd; }
+        .m-typeahead.active .a-input {
+          margin-bottom: 0; }
+        .m-typeahead ::-webkit-scrollbar {
+          width: 4px; }
+        .m-typeahead ::-webkit-scrollbar-track {
+          background: #bdbdbd; }
+        .m-typeahead ::-webkit-scrollbar-thumb {
+          background: #828282; }
+
+
+
+
+          .a-input label, .a-select label {
+            display: block;
+            margin-bottom: 5px; }
+        
+        .a-input.invalid, .a-select.invalid {
+            color: #eb5757; }
+        .a-input.invalid .validation, .a-select.invalid .validation {
+            display: block; }
+        
+        .a-input input, .a-input textarea, .a-select select {
+            width: 200px;
+            padding: 10px 15px;
+            border: 1px solid #bdbdbd;
+            border-radius: 3px; }
+        
+        .validation {
+            display: none;
+            margin-top: 5px;
+            font-size: 12px; }
+        
+        .a-input {
+            display: block;
+            position: relative; }
+        .a-input textarea {
+            min-height: 80px;
+            line-height: 1.5; }
+        .a-input.disabled input,
+        .a-input.disabled textarea {
+            background: #bdbdbd; }
+        .a-input.disabled svg {
+            color: #828282; }
+        .a-input.invalid input,
+        .a-input.invalid textarea {
+            border-color: #eb5757; }
+        .a-input--large input,
+        .a-input--large textarea {
+            width: 100%;
+            max-width: 300px; }
+        .a-input--small input,
+        .a-input--small textarea {
+            width: 150px; }
+        .a-input--largest input,
+        .a-input--largest textarea {
+            width: 100%;
+            max-width: 500px; }
+        .a-input--auto input,
+        .a-input--auto textarea {
+            width: 100%; }
+        .a-input--icon {
+            position: relative; }
+        .a-input--icon input {
+            padding: 10px 15px 10px 44px; }
+        .a-input--icon svg {
+            position: absolute;
+            top: 11px;
+            left: 15px;
+            color: #bdbdbd; }
+
+            .ConfigResponse er-reply-text {
+              fontSize: 12px;
+          }
+          
+          .ConfigResponse response-action {
+              cursor: pointer;
+              color: blue;
+          }
+          
+          .set-reset-buttons{
+              margin-bottom: 20px;
+          }
+
+.form{
+  display: flex;
+  flex-wrap: wrap;
+}
