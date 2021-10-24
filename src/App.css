@@ -43,27 +43,27 @@
   margin: 8px;
   border-radius: 5px;
   border: 1px solid #2b2eff;
-  color: #2b2eff;
+  color: #020211;
   cursor: pointer;
+  background-color: white;
 }
 
 .paginationBttns a:hover {
-  color: white;
+  color: black;
   background-color: #2b2eff;
 }
 
 .paginationActive a {
-  color: white;
-  background-color: #2b2eff;
+  color: rgb(17, 2, 2);
+  background-color: rgb(173, 166, 166);
 }
 
 .paginationDisabled a {
   color: grey;
   background-color: grey;
 }
-.a-select {
-  display: inherit;
-  position: relative; }
+
+
 
 .o-content__inner {
     margin-bottom: 20px; }
