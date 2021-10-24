@@ -3,9 +3,17 @@ import Cricketer from './cricketer';
 import ReactPaginate from "react-paginate";
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField, Select, MenuItem, InputLabel } from '@mui/material';
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
 import './App.css';
+import Datepicker from "react-datepicker";
+import {
+  FormControl,
+} from "@material-ui/core";
+import background from "./img/img.jpg";
+import { flexbox } from "@mui/system";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,10 +42,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'right',
     color: theme.palette.text.secondary,
-  }
+  },
+  formControl: {
+    width: "80%"
+  },
 }));
 
 
+
+const Placeholder = ({ children }) => {
+  return <div >{children}</div>;
+};
 function App() {
 
   const classes = useStyles();
@@ -56,6 +71,10 @@ function App() {
   const [autoCompleteSchool, setAutoCompleteSchool] = useState([]);
   const [aggregatedResult, setaggregatedResult] = useState("");
   const [aggregateFeature, setAggregateFeature] = useState("");
+  const [focus, setFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(false);
+  const onFocus = () => setFocused(true);
+  const onBlur = () => setFocused(false);
 
   const usersPerPage = 9;
   const pagesVisited = pageNumber * usersPerPage;
@@ -410,128 +429,181 @@ function App() {
     setPageNumber(selected);
   }
 
+  const styleObj = {
+    color: 'black',
+    backgroundColor: 'white',
+    width: 350,
+
+  };
+
   return (
     <div className="App">
-      <form onSubmit={getCricketers} className="search-form">
-        <input className="search-bar" type="text" value={search} onChange={updateSearch} />
-        <button className="search-button" type="submit">
-          සොයන්න
-        </button>
-      </form>
+      <div style={{
+        backgroundImage: `url(${background})`
 
-      <Grid className={classes.paper1} container spacing={1}>
-        <Grid xs={4}>
-          <Autocomplete
-            onChange={(event, value) => updateNewName(value)}
-            disablePortal
-            id="combo-box-demo"
-            options={autoCompleteName}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField value={name} onChange={updateName} {...params} label="නම" />}
+      }}>
+
+        <form onSubmit={getCricketers} className="search-form">
+          <input className="search-bar" type="text" value={search} onChange={updateSearch} placeholder="විස්තරය" />
+
+        </form>
+
+        <Grid className={classes.paper1} container direction={'raw'} spacing={1}>
+          <Grid xs={3}>
+            <Autocomplete
+              onChange={(event, value) => updateNewName(value)}
+              disablePortal
+              id="combo-box-demo"
+              options={autoCompleteName}
+              sx={{ width: 250 }}
+              renderInput={(params) => <TextField value={name} onChange={updateName} style={{
+                backgroundColor: "white"
+              }} {...params} label="නම" />}
+            />
+          </Grid>
+
+          <Grid item xs={3}>
+            <Autocomplete
+              onChange={(event, value) => updateNewTown(value)}
+              disablePortal
+              id="combo-box-demo"
+              options={autoCompleteTown}
+              sx={{ width: 250 }}
+              renderInput={(params) => <TextField value={town} onChange={updateTown} style={{
+                backgroundColor: "white"
+              }} {...params} label="උපන් ගම" />}
+            />
+          </Grid>
+
+          <Grid xs={3}>
+            <Autocomplete
+              onChange={(event, value) => updateNewSchool(value)}
+              disablePortal
+              id="combo-box-demo"
+              options={autoCompleteSchool}
+              sx={{ width: 250 }}
+              renderInput={(params) => <TextField value={school} onChange={updateSchool} style={{
+                backgroundColor: "white"
+              }} {...params} label="පාසල" />}
+            />
+          </Grid>
+          <Grid xs={3}>
+            <TextField
+              onFocus={onFocus}
+              onBlur={onBlur}
+              value={startdate}
+              onChange={updateStartdate}
+
+              style={{
+                backgroundColor: "white"
+              }}
+              label="උපන් කාල වකවානුව"
+              type={hasValue || focus ? "date" : "text"}
+
+            />
+          </Grid>
+
+          <Grid xs={4} >
+            <FormControl required className={classes.formControl}>
+              <Select value={batting} onChange={updateBatting} displayEmpty style={{
+                backgroundColor: "white"
+              }} renderValue={
+                batting !== "" ? undefined : () => <Placeholder >පිතිකරන විලාසය</Placeholder>
+              }  >
+
+                <MenuItem value="දකුණත් පිතිකරු">දකුණත් පිතිකරු</MenuItem>
+                <MenuItem value="වමත් පිතිකරු">වමත් පිතිකරු</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid xs={4}>
+            <FormControl required className={classes.formControl}>
+              <Select value={bowling} onChange={updateBowling} displayEmpty style={{
+                backgroundColor: "white"
+              }} renderValue={
+                bowling !== "" ? undefined : () => <Placeholder>පන්දු යවන ඉරියව්ව</Placeholder>
+              } >
+                <MenuItem value="Slow left arm orthodox">Slow left arm orthodox</MenuItem>
+                <MenuItem value="Right arm fast medium">Right arm fast medium</MenuItem>
+                <MenuItem value="Legbreak">Legbreak</MenuItem>
+                <MenuItem value="Right arm medium">Right arm medium</MenuItem>
+                <MenuItem value="Right arm medium fast">Right arm medium fast</MenuItem>
+                <MenuItem value="Left arm medium fast">Left arm medium fast</MenuItem>
+                <MenuItem value="Legbreak googly">Legbreak googly</MenuItem>
+                <MenuItem value="Right arm offbreak">Right arm offbreak</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+
+
+
+          <Grid xs={4}>
+            <FormControl required className={classes.formControl}>
+              <Select value={aggregateFeature} onChange={updateAggregateFeature} style={{
+                backgroundColor: "white"
+              }} displayEmpty renderValue={
+                aggregateFeature !== "" ? undefined : () => <Placeholder>සමූහගත කිරීම</Placeholder>
+              } >
+                <MenuItem value="පාසල">පාසල</MenuItem>
+                <MenuItem value="උපන්_ගම">උපන් ගම</MenuItem>
+                <MenuItem value="පිතිකරන_විලාසය">පිතිකරන විලාසය</MenuItem>
+                <MenuItem value="පන්දු_යවන_ඉරියව්ව">පන්දු යවන ඉරියව්ව</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={12} >
+            <Box pt={1}>
+              <Button variant="contained" onClick={getCricketers}>සොයන්න</Button>
+            </Box>
+          </Grid>
+        </Grid>
+
+
+
+
+
+
+
+
+
+        <div className="content" dangerouslySetInnerHTML={{ __html: aggregatedResult }} style={styleObj}></div>
+
+
+
+
+        <div className="cricketers">
+          {cricketers.slice(pagesVisited, pagesVisited + usersPerPage).map(cricketer => (
+            < Cricketer
+              key={cricketer._source.සම්පූර්ණ_නම}
+              full_name={cricketer._source.සම්පූර්ණ_නම}
+              image={cricketer._source.ඡායා_රූප}
+              birth={cricketer._source.උපන්දිනය}
+              town={cricketer._source.උපන්_ගම}
+              age={cricketer._source.වයස}
+              school={cricketer._source.පාසල}
+              batting_style={cricketer._source.පිතිකරන_විලාසය}
+              bawling_style={cricketer._source.පන්දු_යවන_ඉරියව්ව}
+
+            />
+          ))}
+
+
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
           />
-        </Grid>
+        </div>
 
-        <Grid xs={4}>
-          <Autocomplete
-            onChange={(event, value) => updateNewTown(value)}
-            disablePortal
-            id="combo-box-demo"
-            options={autoCompleteTown}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField value={town} onChange={updateTown} {...params} label="උපන් ගම" />}
-          />
-        </Grid>
-
-        <Grid xs={4}>
-          <Autocomplete
-            onChange={(event, value) => updateNewSchool(value)}
-            disablePortal
-            id="combo-box-demo"
-            options={autoCompleteSchool}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField value={school} onChange={updateSchool} {...params} label="පාසල" />}
-          />
-        </Grid>
-
-        <Grid xs={4}>
-          <InputLabel >පිතිකරන_විලාසය</InputLabel>
-          <Select value={batting} onChange={updateBatting} id="demo-simple-select-label" label="පිතිකරන_විලාසය" >
-            <MenuItem value="" >පිතිකරන විලාසය</MenuItem>
-            <MenuItem value="දකුණත් පිතිකරු">දකුණත් පිතිකරු</MenuItem>
-            <MenuItem value="වමත් පිතිකරු">වමත් පිතිකරු</MenuItem>
-          </Select>
-        </Grid>
-
-        <Grid xs={4}>
-          <InputLabel >පන්දු_යවන_ඉරියව්ව</InputLabel>
-          <Select value={bowling} onChange={updateBowling} label="පන්දු_යවන_ඉරියව්ව" >
-            <MenuItem value="Slow left arm orthodox">Slow left arm orthodox</MenuItem>
-            <MenuItem value="Right arm fast medium">Right arm fast medium</MenuItem>
-            <MenuItem value="Legbreak">Legbreak</MenuItem>
-            <MenuItem value="Right arm medium">Right arm medium</MenuItem>
-            <MenuItem value="Right arm medium fast">Right arm medium fast</MenuItem>
-            <MenuItem value="Left arm medium fast">Left arm medium fast</MenuItem>
-            <MenuItem value="Legbreak googly">Legbreak googly</MenuItem>
-            <MenuItem value="Right arm offbreak">Right arm offbreak</MenuItem>
-          </Select>
-        </Grid>
-
-        <Grid xs={4}>
-          <InputLabel >උපන්_කාල_වකවානුව</InputLabel>
-          <input type="date" formatted_date='YYYY-MM-DD' value={startdate} onChange={updateStartdate} />
-        </Grid>
-
-        <Grid xs={4}>
-          <InputLabel >aggregate </InputLabel>
-          <Select value={aggregateFeature} onChange={updateAggregateFeature} label="aggregate" >
-            <MenuItem value="පාසල">පාසල</MenuItem>
-            <MenuItem value="උපන්_ගම">උපන් ගම</MenuItem>
-            <MenuItem value="පිතිකරන_විලාසය">පිතිකරන විලාසය</MenuItem>
-            <MenuItem value="පන්දු_යවන_ඉරියව්ව">පන්දු යවන ඉරියව්ව</MenuItem>
-          </Select>
-        </Grid>
-      </Grid>
-
-
-
-
-
-
-      <div className="content" dangerouslySetInnerHTML={{ __html: aggregatedResult }}></div>
-
-
-
-
-      <div className="cricketers">
-        {cricketers.slice(pagesVisited, pagesVisited + usersPerPage).map(cricketer => (
-          < Cricketer
-            key={cricketer._source.සම්පූර්ණ_නම}
-            full_name={cricketer._source.සම්පූර්ණ_නම}
-            image={cricketer._source.ඡායා_රූප}
-            birth={cricketer._source.උපන්දිනය}
-            town={cricketer._source.උපන්_ගම}
-            age={cricketer._source.වයස}
-            school={cricketer._source.පාසල}
-            batting_style={cricketer._source.පිතිකරන_විලාසය}
-            bawling_style={cricketer._source.පන්දු_යවන_ඉරියව්ව}
-
-          />
-        ))}
-
-
-        <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName={"paginationBttns"}
-          previousLinkClassName={"previousBttn"}
-          nextLinkClassName={"nextBttn"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
       </div>
-
     </div>
   );
 }
