@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Sri Lankan Cricketers- Search Engine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sri Lankan Cricketers- Search Engine enrich with details about over 325 Sri Lankan Cricketers.
+## Table of contents
 
-## Available Scripts
+- Technologies
+- Corpus
+- Setup
+- Screeshots
 
-In the project directory, you can run:
+## Technologies
+Project is created with:
 
-### `npm start`
+- Elasticsearch version: 7.6
+- React version: 16.13.1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Corpus
 
-### `npm test`
+https://www.espncricinfo.com/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Attributes
 
-### `npm run build`
+1. සම්පූර්ණ නම    
+2. උපන් ගම    
+3. උපන්දිනය    
+4. වයස    
+5. පාසල     
+6. ඡායා රූප  
+7. ජීවන දත්ත    
+8. අන්වර්ත නාම    
+9. පිතිකරන විලාසය     
+10. පන්දු යවන ඉරියව්ව	
+11. ක්‍රීඩා ඉරියව්ව     
+12. පුද්ගල වාර්තා      
+13. කණ්ඩායම්     
+14. පුද්ගල දක්ශතා 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Execute the data scraping scripts or use the uploaded corpus.
 
-### `npm run eject`
+Create Elasticsearch instance
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```$ curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+$ echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+$ sudo apt update
+$ sudo apt install elasticsearch
+$ sudo systemctl start elasticsearch 
+```
+Create a new index in elasticsearch insatnce.
+```
+curl -X PUT "localhost:9200/srilankancricketers?pretty"
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Execute the data migration script to upload the documents to elasticsearch.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Clone the repository
+```
+$ git clone https://github.com/NadeeshaGarusinghe/Sri-Lankan-Cricketers.git
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Setup React Server
+```
+$ cd ReactFrontEnd
+$ npm install
+$ npm start
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Screeshots
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Landing Page
+![Landing_page](https://user-images.githubusercontent.com/47114134/138665468-32b79e3f-f5ac-488c-ab22-72888369899e.png)
 
-### Code Splitting
+### Search options
+![Search_Group_Filter_Results](https://user-images.githubusercontent.com/47114134/138665526-9eb39593-2bfd-447d-b732-7144a21315cf.JPG)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Auto Complete
+![AutoComplete](https://user-images.githubusercontent.com/47114134/138665561-d8c3feba-f86b-4703-81e0-68a5a1454088.png)
 
-### Analyzing the Bundle Size
+### Cricketer card
+![Cricketer_card](https://user-images.githubusercontent.com/47114134/138665589-96accb4f-570b-428d-bd82-e10bd1605b3a.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Full Cricketer
+![Full_Cricketer_1](https://user-images.githubusercontent.com/47114134/138665640-33af17cc-ff82-4d0b-979b-343253e72805.JPG)
 
-### Making a Progressive Web App
+![Full_Cricketer_2](https://user-images.githubusercontent.com/47114134/138665654-95379736-7147-4187-94fc-77e764f4fcad.JPG)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![Full_Cricketer_3](https://user-images.githubusercontent.com/47114134/138665669-3c7a2526-2a66-4f31-89f7-2224a7209fa5.JPG)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
